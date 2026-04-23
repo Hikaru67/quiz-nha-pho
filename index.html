@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luyện Trắc Nghiệm</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Bo de luyen tap</p>
+          <h1>Luyện đề trắc nghiệm nhà phố</h1>
+          <p class="hero-text">
+            Trang web tĩnh để luyện tập nhanh theo bộ câu hỏi đã trích xuất từ PDF.
+            Chọn đáp án để xem đúng sai ngay, theo dõi tiến độ và ôn lại các câu đã làm.
+          </p>
+        </div>
+
+        <div class="hero-panel">
+          <p class="hero-panel-label">Su dung du lieu</p>
+          <p class="hero-panel-value">quiz-data.json</p>
+          <div class="hero-actions">
+            <button id="jump-random" class="ghost-button" type="button">Câu ngẫu nhiên</button>
+            <button id="reset-progress" class="solid-button" type="button">Làm lại</button>
+          </div>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="main-column">
+          <section class="stats-grid" aria-label="Tổng quan">
+            <article class="stat-card">
+              <span class="stat-label">Tổng câu</span>
+              <strong id="total-count" class="stat-value">0</strong>
+            </article>
+            <article class="stat-card">
+              <span class="stat-label">Đã làm</span>
+              <strong id="answered-count" class="stat-value">0</strong>
+            </article>
+            <article class="stat-card">
+              <span class="stat-label">Đúng</span>
+              <strong id="correct-count" class="stat-value">0</strong>
+            </article>
+            <article class="stat-card">
+              <span class="stat-label">Còn lại</span>
+              <strong id="remaining-count" class="stat-value">0</strong>
+            </article>
+          </section>
+
+          <section class="panel progress-panel">
+            <div class="panel-head">
+              <div>
+                <p class="panel-kicker">Tiến độ</p>
+                <h2 id="progress-heading">Đang tải dữ liệu</h2>
+              </div>
+              <p id="accuracy-pill" class="accuracy-pill">0% chính xác</p>
+            </div>
+
+            <div class="progress-track" aria-hidden="true">
+              <div id="progress-fill" class="progress-fill"></div>
+            </div>
+
+            <p id="message-box" class="message-box is-loading">Đang đọc bộ đề...</p>
+          </section>
+
+          <article id="question-card" class="panel question-card" aria-live="polite">
+            <div class="question-head">
+              <div class="question-meta">
+                <span id="question-counter" class="question-counter">Câu 0 / 0</span>
+                <span id="question-source-id" class="question-source-id">Mã gốc: -</span>
+              </div>
+              <span class="shortcut-hint">Phím tắt: 1-6, A-F, ←, →</span>
+            </div>
+
+            <h2 id="question-text" class="question-text">Đang tải câu hỏi...</h2>
+
+            <div id="option-list" class="option-list" role="list"></div>
+
+            <p id="question-feedback" class="question-feedback">
+              Chọn một đáp án để bắt đầu luyện tập.
+            </p>
+          </article>
+
+          <div class="footer-actions">
+            <button id="prev-question" class="ghost-button" type="button">Câu trước</button>
+            <button id="next-question" class="solid-button" type="button">Câu tiếp</button>
+          </div>
+        </section>
+
+        <aside class="sidebar">
+          <section class="panel sidebar-card">
+            <p class="panel-kicker">Mẹo dùng nhanh</p>
+            <ul class="tips-list">
+              <li>Trang tự lưu tiến độ vào trình duyệt hiện tại.</li>
+              <li>Ô xanh là câu đúng, ô đỏ là câu đang trả lời sai.</li>
+              <li>Có thể mở trực tiếp file hoặc đưa nguyên thư mục này lên GitHub Pages.</li>
+            </ul>
+          </section>
+
+          <section class="panel sidebar-card">
+            <div class="sidebar-head">
+              <div>
+                <p class="panel-kicker">Bảng câu hỏi</p>
+                <h2>Chuyển nhanh</h2>
+              </div>
+              <span id="palette-caption" class="palette-caption">0 câu</span>
+            </div>
+
+            <div id="question-palette" class="question-palette" aria-label="Danh sách câu"></div>
+          </section>
+
+          <section id="completion-card" class="panel sidebar-card completion-card">
+            <p class="panel-kicker">Kết quả</p>
+            <h2>Chưa hoàn thành</h2>
+            <p>Trả lời hết bộ đề để xem tổng kết.</p>
+          </section>
+        </aside>
+      </main>
+    </div>
+
+    <template id="option-template">
+      <button class="option-button" type="button">
+        <span class="option-letter"></span>
+        <span class="option-copy"></span>
+      </button>
+    </template>
+
+    <noscript>
+      <div class="noscript-banner">Cần bật JavaScript để dùng trang luyện đề này.</div>
+    </noscript>
+
+    <script src="quiz-data.js"></script>
+    <script src="app.js" defer></script>
+  </body>
+</html>
